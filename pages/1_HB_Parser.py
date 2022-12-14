@@ -4,17 +4,18 @@ import numpy as np
 import json
 
 st.set_page_config(
-    page_title="Hotelbeds Parser"
+    page_title="Hotelbeds Parser",
+    page_icon="🏨"
 )
 st.sidebar.header("Hotelbeds Parser")
 
 st.title("Hotelbeds Booking Parser")
 
-uploaded_file = st.file_uploader("Select json file to upload", type=["json"])
+hb_uploaded_file = st.file_uploader("Select json file to upload", type=["json"])
 
-if uploaded_file is not None:
+if hb_uploaded_file is not None:
     # Read and unnest JSON file
-    data = json.load(uploaded_file)
+    data = json.load(hb_uploaded_file)
     df_bookings = pd.json_normalize(data, record_path=["bookings", "bookings"])
     df_pax = pd.json_normalize(data, record_path=["bookings", "bookings", "hotel", "rooms", "paxes"], 
                         meta=[["bookings", "bookings", "reference"], ["bookings", "bookings", "hotel", "rooms", "id"], ["bookings", "bookings", "hotel", "rooms", "code"]], 
@@ -34,9 +35,9 @@ if uploaded_file is not None:
     df_export = df_export.merge(df_pax_group, how="left", on="reference")
     df_export = df_export.merge(df_rate_group, how="left", on=["reference", "roomId"])
 
-    with open("export.csv","w") as f:
+    with open("export_hb.csv","w") as f:
         df_export.to_csv(f)
-    with open("export.csv") as f:
+    with open("export_hb.csv") as f:
         st.download_button(
             label="Download Parsed Bookings File", 
             data=f, 
