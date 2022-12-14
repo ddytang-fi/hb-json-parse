@@ -18,7 +18,8 @@ if ai_uploaded_file is not None:
     # Read JSON File
     df = pd.read_json(ai_uploaded_file)
     df["roomtype"] = np.where(df["ratedescription"].str.contains("1 sofa bed"), "Sofa Bed + ", "")
-    df["roomtype"] = df["roomtype"] + np.where(df["ratedescription"].str.contains("2 queen"), "Queen Queen",
+    df["roomtype"] = df["roomtype"] + np.where((df["ratedescription"].str.contains("1 queen")) & (df["ratedescription"].str.contains("1 king")), "King + Queen",
+                            np.where(df["ratedescription"].str.contains("2 queen"), "Queen Queen",
                             np.where(df["ratedescription"].str.contains("1 queen"), "Queen",
                             np.where(df["ratedescription"].str.contains("2 king"), "King King",
                             np.where(df["ratedescription"].str.contains("1 king"), "King",
@@ -27,7 +28,7 @@ if ai_uploaded_file is not None:
                             np.where(df["ratedescription"].str.contains("2 twin"), "Twin Twin",
                             np.where(df["ratedescription"].str.contains("1 twin"), "Twin",
                             np.where(df["ratedescription"].str.contains("4 bunk"), "Bunk Bunk Bunk Bunk",
-                            "Other")))))))))
+                            "Other"))))))))))
     df_export = df[["hotelcode", "ratedate", "roomtype", "onsiterate", "status_code", "ratedescription"]]
 
     with open("export_ai.csv","w") as f:
