@@ -14,6 +14,8 @@ st.title("Hotelbeds Booking Parser")
 hb_uploaded_file = st.file_uploader("Select json file to upload", type=["json"])
 
 if hb_uploaded_file is not None:
+    export_filename = hb_uploaded_file.name.replace(".json","") + ".csv"
+
     # Read and unnest JSON file
     data = json.load(hb_uploaded_file)
     df_bookings = pd.json_normalize(data, record_path=["bookings", "bookings"])
@@ -41,6 +43,6 @@ if hb_uploaded_file is not None:
         st.download_button(
             label="Download Parsed Bookings File", 
             data=f, 
-            file_name="hotelbeds_bookings.csv",
+            file_name=export_filename,
             mime="text/csv"
         )

@@ -15,6 +15,8 @@ st.title("Aggregate Intelligence Parser")
 ai_uploaded_file = st.file_uploader("Select json file to upload", type=["json"])
 
 if ai_uploaded_file is not None:
+    export_filename = ai_uploaded_file.name.replace(".json","") + ".csv"
+
     # Read JSON File
     df = pd.read_json(ai_uploaded_file)
     df["roomtype"] = np.where(df["ratedescription"].str.contains("1 sofa bed"), "Sofa Bed + ", "")
@@ -39,6 +41,6 @@ if ai_uploaded_file is not None:
         st.download_button(
             label="Download Parsed Rack Rates File", 
             data=f, 
-            file_name="ai_rack_rates.csv",
+            file_name=export_filename,
             mime="text/csv"
         )
