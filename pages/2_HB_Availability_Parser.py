@@ -13,7 +13,7 @@ st.title("Hotelbeds Availability Parser")
 
 hba_uploaded_file = st.file_uploader("Select json file to upload", type=["json"])
 
-if jba_uploaded_file is not None:
+if hba_uploaded_file is not None:
     export_filename = hba_uploaded_file.name.replace(".json","") + ".csv"
 
     # Read and unnest JSON file
