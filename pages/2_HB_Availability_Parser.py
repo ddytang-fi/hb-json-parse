@@ -21,7 +21,7 @@ if hba_uploaded_file is not None:
     df_availability = pd.json_normalize(data, record_path=["hotels", "hotels", "rooms", "rates"]
                       , meta=[["hotels", "hotels", "currency"], ["hotels", "hotels", "code"], ["hotels", "hotels", "name"], ["hotels", "hotels", "rooms", "code"], ["hotels", "hotels", "rooms", "name"]]
                       , errors="ignore")
-    df_export = df_availability[["hotels.hotels.code", "hotels.hotels.name", "hotels.hotels.rooms.code", "hotels.hotels.rooms.name", "hotels.hotels.currency", "net", "packaging", "rateType", "rateKey"]]
+    df_export = df_availability[["hotels.hotels.code", "hotels.hotels.name", "hotels.hotels.rooms.code", "hotels.hotels.rooms.name", "hotels.hotels.currency", "net", "packaging", "boardName" "rateType", "rateKey"]]
 
     with open("export_hba.csv","w") as f:
         df_export.to_csv(f)
