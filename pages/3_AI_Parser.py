@@ -48,7 +48,7 @@ if ai_uploaded_file is not None:
                             np.where(df["ratedescription"].str.contains("1 Twin"), "Twin",
                             np.where(df["ratedescription"].str.contains("4 bunk"), "Bunk Bunk Bunk Bunk",
                             np.where(df["ratedescription"].str.contains("4 Bunk"), "Bunk Bunk Bunk Bunk",
-                            "Other"))))))))))))
+                            "Other")))))))))))))))))))))))))))
     df_export = df[["websitecode", "hotelcode", "ratedate", "roomtype", "onsiterate", "status_code", "ratedescription", "taxtype"]]
 
     with open("export_ai.csv","w") as f:
