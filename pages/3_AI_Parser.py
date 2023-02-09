@@ -33,6 +33,8 @@ if ai_uploaded_file is not None:
                             np.where(df["ratedescription"].str.contains("2 King"), "King King",
                             np.where(df["ratedescription"].str.contains("1 king"), "King",
                             np.where(df["ratedescription"].str.contains("1 King"), "King",
+                            np.where(df["ratedescription"].str.contains("2 double"), "Double Double",
+                            np.where(df["ratedescription"].str.contains("2 Double"), "Double Double",
                             np.where(df["ratedescription"].str.contains("2 full"), "Double Double",
                             np.where(df["ratedescription"].str.contains("2 Full"), "Double Double",
                             np.where(df["ratedescription"].str.contains("1 full"), "Double",
@@ -48,7 +50,7 @@ if ai_uploaded_file is not None:
                             np.where(df["ratedescription"].str.contains("1 Twin"), "Twin",
                             np.where(df["ratedescription"].str.contains("4 bunk"), "Bunk Bunk Bunk Bunk",
                             np.where(df["ratedescription"].str.contains("4 Bunk"), "Bunk Bunk Bunk Bunk",
-                            "Other")))))))))))))))))))))))))))
+                            "Other")))))))))))))))))))))))))))))
     df_export = df[["websitecode", "hotelcode", "ratedate", "roomtype", "onsiterate", "status_code", "ratedescription", "taxtype", "sourceurl"]]
 
     with open("export_ai.csv","w") as f:
