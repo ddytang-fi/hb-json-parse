@@ -18,10 +18,10 @@ if pla_uploaded_file is not None:
 
     # Read and unnest JSON file
     data = json.load(pla_uploaded_file)
-    df_availability = pd.json_normalize(data, record_path=["getHotelExpress.Results", "results", "hotel_data", "room_data", "rate_data"]
-                      , meta=[["getHotelExpress.Results", "results", "hotel_data", "id"], ["getHotelExpress.Results", "results", "hotel_data", "name"]]
+    df_availability = pd.json_normalize(data, record_path=["getHotelExpress.Availability", "results", "hotel_data", "room_data", "rate_data"]
+                      , meta=[["getHotelExpress.Availability", "results", "hotel_data", "id"], ["getHotelExpress.Availability", "results", "hotel_data", "name"], ["getHotelExpress.Availability", "results", "hotel_data", "room_data", "title"]]
                       , errors="ignore")
-    df_export = df_availability[["getHotelExpress.Results.results.hotel_data.id", "getHotelExpress.Results.results.hotel_data.name", "title", "price_details.baseline_total"]]
+    df_export = df_availability[["getHotelExpress.Availability.results.hotel_data.id", "getHotelExpress.Availability.results.hotel_data.name", "getHotelExpress.Availability.results.hotel_data.room_data.title", "price_details.baseline_total"]]
 
     with open("export_pla.csv","w") as f:
         df_export.to_csv(f)
